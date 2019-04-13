@@ -33,9 +33,11 @@ class Player(pygame.sprite.Sprite):
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
         self.speedx = 0
+        self.speedy = 0
 
     def update(self):
         self.speedx = 0
+        self.speedy = 0
         keystate = pygame.key.get_pressed()
         if keystate[pygame.K_LEFT]:
             self.speedx = -8
@@ -46,6 +48,16 @@ class Player(pygame.sprite.Sprite):
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
+
+        if keystate[pygame.K_UP]:
+            self.speedy = -4
+        if keystate[pygame.K_DOWN]:
+            self.speedy = 4
+        self.rect.y += self.speedy
+        if self.rect.top < 0:
+            self.rect.top = 0
+        if self.rect.bottom > HEIGHT:
+            self.rect.bottom = HEIGHT
 
 all_sprites = pygame.sprite.Group()
 player = Player()
